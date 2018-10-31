@@ -1,4 +1,10 @@
 ---
+lookup_options:
+  wls_profile::weblogic_password:
+    convert_to: Sensitive
+  wls_profile::basic_domain::wls_domain:
+    convert_to: Sensitive
+
 wls_profile::domain_name:         MYDOMAIN
 wls_profile::cluster_name:        main
 wls_profile::java_version:        8u152
@@ -165,7 +171,7 @@ wls_profile::basic_domain::wls_domain::adminserver_address:     "%{::wls_profile
 wls_profile::basic_domain::wls_domain::os_user:                 "%{::wls_profile::os_user}"
 wls_profile::basic_domain::wls_domain::os_group:                "%{::wls_profile::os_group}"
 wls_profile::basic_domain::wls_domain::weblogic_user:           "%{::wls_profile::weblogic_user}"
-wls_profile::basic_domain::wls_domain::weblogic_password:       "%{::wls_profile::weblogic_password}"
+wls_profile::basic_domain::wls_domain::weblogic_password:       "%{alias('wls_profile::weblogic_password')}"
 wls_profile::basic_domain::wls_domain::bam_enabled:             false
 wls_profile::basic_domain::wls_domain::b2b_enabled:             false
 wls_profile::basic_domain::wls_domain::ess_enabled:             false
@@ -275,7 +281,7 @@ wls_profile::node::copy_domain::os_user:                    "%{::wls_profile::os
 wls_profile::node::copy_domain::os_group:                   "%{::wls_profile::os_group}"
 wls_profile::node::copy_domain::adminserver_address:        "%{::wls_profile::adminserver_address}"
 wls_profile::node::copy_domain::weblogic_user:              "%{::wls_profile::weblogic_user}"
-wls_profile::node::copy_domain::weblogic_password:          "%{::wls_profile::weblogic_password}"
+wls_profile::node::copy_domain::weblogic_password:          "%{alias('wls_profile::weblogic_password')}"
 wls_profile::node::copy_domain::nodemanager_address:        "%{::wls_profile::nodemanager_address}"
 wls_profile::node::copy_domain::nodemanager_wait:           60
 #------------------------------------------------------------------------------

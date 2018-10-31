@@ -165,7 +165,7 @@ class wls_profile::basic_domain::wls_domain(
   String[1]           $os_user,
   String[1]           $os_group,
   String[1]           $weblogic_user,
-  String[1]           $weblogic_password,
+  Easy_type::Password $weblogic_password,
   Boolean             $bam_enabled,
   Boolean             $b2b_enabled,
   Boolean             $ess_enabled,
@@ -179,8 +179,10 @@ class wls_profile::basic_domain::wls_domain(
   Optional[String[1]] $repository_database_url = undef,
   Optional[String[1]] $rcu_database_url        = undef,
   Optional[String[1]] $repository_prefix       = undef,
-  Optional[String[1]] $repository_password     = undef,
-  Optional[String[1]] $repository_sys_password = undef,
+  Optional[Easy_type::Password]
+                      $repository_password     = undef,
+  Optional[Easy_type::Password]
+                      $repository_sys_password = undef,
 
 ) inherits wls_profile {
 
@@ -310,7 +312,7 @@ class wls_profile::basic_domain::wls_domain(
     nodemanager_address => $nodemanager_address,
     nodemanager_port    => $nodemanager_port,
     weblogic_user       => $weblogic_user,
-    weblogic_password   => $weblogic_password,
+    weblogic_password   => unwrap($weblogic_password),
     weblogic_home_dir   => $weblogic_home,
     subscribe           => Wls_install::Domain[$domain_name],
   }
